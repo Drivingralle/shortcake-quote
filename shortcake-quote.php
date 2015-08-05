@@ -26,7 +26,12 @@ load_plugin_textdomain(
 	'shortcake-quote/languages'
 );
 
-add_action( 'init', function() {
+add_action( 'init', 'dr_shortcake_quote_function' );
+function  dr_shortcake_quote_function() {
+
+	/*
+	 * Check if Shortcode UI plugin is active
+	 */
 	if ( ! function_exists( 'shortcode_ui_register_for_shortcode' ) ) {
 		add_action( 'admin_notices', function(){
 			if ( current_user_can( 'activate_plugins' ) ) {
@@ -92,4 +97,4 @@ add_action( 'init', function() {
 			),
 		)
 	);
-} );
+}
