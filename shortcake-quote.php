@@ -20,3 +20,8 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  */
+load_plugin_textdomain(
+	'shortcake_quote',
+	false,
+	'shortcake-quote/languages'
+);
