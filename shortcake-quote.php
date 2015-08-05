@@ -53,8 +53,7 @@ function  dr_shortcake_quote_function() {
 	 * Register your shortcode as you would normally.
 	 * This is a simple example for a pullquote with a citation.
 	 */
-	add_shortcode( 'shortcake_quote', 'dr_shortcode_quote_output' );
-	function dr_shortcode_quote_output( $attr, $content = '' ) {
+	add_shortcode( 'shortcake_quote', function( $attr, $content = '' ) {
 		$attr = wp_parse_args( $attr, array(
 			'source'     => '',
 			'attachment' => 0
@@ -74,7 +73,8 @@ function  dr_shortcake_quote_function() {
 
 		<?php
 		return ob_get_clean();
-	}
+	} );
+
 
 	/**
 	 * Register a UI for the Shortcode.
