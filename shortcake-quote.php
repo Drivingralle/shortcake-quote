@@ -20,12 +20,19 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  */
+
+/*
+ * Load the translation
+ */
 load_plugin_textdomain(
 	'shortcake_quote',
 	false,
 	'shortcake-quote/languages'
 );
 
+/*
+ * The function it self
+ */
 add_action( 'init', 'dr_shortcake_quote_function' );
 function  dr_shortcake_quote_function() {
 
@@ -33,18 +40,20 @@ function  dr_shortcake_quote_function() {
 	 * Check if Shortcode UI plugin is active
 	 */
 	if ( ! function_exists( 'shortcode_ui_register_for_shortcode' ) ) {
-		add_action( 'admin_notices', function(){
+		add_action( 'admin_notices', function () {
 			if ( current_user_can( 'activate_plugins' ) ) {
-				echo '<div class="error message"><p>' . __( 'Shortcode UI plugin must be active for Shortcode UI Example plugin to function.', 'shortcake_quote' ) .'</p></div>';
+				echo '<div class="error message"><p>' . __( 'Shortcode UI plugin must be active for Shortcode UI Example plugin to function.', 'shortcake_quote' ) . '</p></div>';
 			}
-		});
+		} );
+
 		return;
 	}
+
 	/**
 	 * Register your shortcode as you would normally.
 	 * This is a simple example for a pullquote with a citation.
 	 */
-	add_shortcode( 'shortcake_quote', function( $attr, $content = '' ) {
+	add_shortcode( 'shortcake_quote', function ( $attr, $content = '' ) {
 		$attr = wp_parse_args( $attr, array(
 			'source'     => '',
 			'attachment' => 0
@@ -65,6 +74,7 @@ function  dr_shortcake_quote_function() {
 		<?php
 		return ob_get_clean();
 	} );
+
 	/**
 	 * Register a UI for the Shortcode.
 	 * Pass the shortcode tag (string)
@@ -74,7 +84,7 @@ function  dr_shortcake_quote_function() {
 		'shortcake_quote',
 		array(
 			// Display label. String. Required.
-			'label' => __( 'Shortcake Quote', 'shortcake_quote' ),
+			'label'         => __( 'Shortcake Quote', 'shortcake_quote' ),
 			// Icon/attachment for shortcode. Optional. src or dashicons-$icon. Defaults to carrot.
 			'listItemImage' => 'dashicons-editor-quote',
 			'inner_content' => array(
@@ -84,14 +94,14 @@ function  dr_shortcake_quote_function() {
 			// Available shortcode attributes and default values. Required. Array.
 			// Attribute model expects 'attr', 'type' and 'label'
 			// Supported field types: text, checkbox, textarea, radio, select, email, url, number, and date.
-			'attrs' => array(
+			'attrs'         => array(
 				array(
 					'label' => __( 'Cite', 'shortcake_quote' ),
 					'attr'  => 'source',
 					'type'  => 'text',
-					'meta' => array(
+					'meta'  => array(
 						'placeholder' => __( 'Who said that?', 'shortcake_quote' ),
-						'data-test'    => 1,
+						'data-test'   => 1,
 					),
 				),
 			),
